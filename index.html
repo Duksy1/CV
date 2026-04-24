@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Antonio Belan — Cross-Platform Developer iz Zagreba. Web development, API integracije, mobilne aplikacije, WordPress, optimizacija i digital delivery." />
+  <meta name="author" content="Antonio Belan" />
+  <meta name="theme-color" content="#f4f1e8" />
+  <title>Antonio Belan — Cross-Platform Developer</title>
+
+  <style>
+    :root {
+      --paper: #f4f1e8;
+      --paper-2: #ebe6da;
+      --ink: #11110f;
+      --ink-2: #2d2d29;
+      --muted: #767268;
+      --line: #c9c2b4;
+      --line-dark: #2a2a26;
+      --white: #ffffff;
+      --silver: #a7a49c;
+      --accent: #11110f;
+      --max: 1440px;
+      --sidebar: 360px;
+      --radius: 0px;
+      --shadow: 0 28px 70px rgba(17, 17, 15, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(17,17,15,0.045) 1px, transparent 1px),
+        linear-gradient(rgba(17,17,15,0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.45;
+      overflow-x: hidden;
+    }
+
+    body.dark {
+      --paper: #11110f;
+      --paper-2: #191916;
+      --ink: #f4f1e8;
+      --ink-2: #dfd8c8;
+      --muted: #a39c8f;
+      --line: #35352f;
+      --line-dark: #dfd8c8;
+      --white: #171714;
+      --silver: #c6bfb0;
+      --accent: #f4f1e8;
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+      background:
+        linear-gradient(90deg, rgba(244,241,232,0.045) 1px, transparent 1px),
+        linear-gradient(rgba(244,241,232,0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+    }
+
+    ::selection {
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .page-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      width: 0%;
+      height: 4px;
+      background: var(--ink);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      min-height: 100vh;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      background: rgba(244, 241, 232, 0.58);
+    }
+
+    body.dark .layout {
+      background: rgba(17, 17, 15, 0.72);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border-right: 1px solid var(--line-dark);
+      background: var(--ink);
+      color: var(--paper);
+      overflow: hidden;
+    }
+
+    body.dark .sidebar {
+      background: var(--paper-2);
+      color: var(--ink);
+      border-right-color: var(--line);
+    }
+
+    .sidebar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.24;
+    }
+
+    .side-top {
+      position: relative;
+      z-index: 1;
+      padding: 28px;
+      border-bottom: 1px solid rgba(244, 241, 232, 0.18);
+    }
+
+    body.dark .side-top {
+      border-bottom-color: var(--line);
+    }
+
+    .monogram {
+      display: grid;
+      place-items: center;
+      width: 82px;
+      height: 82px;
+      margin-bottom: 24px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: -0.08em;
+    }
+
+    .side-title {
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .side-role {
+      max-width: 250px;
+      margin-top: 10px;
+      font-size: 1.45rem;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      font-weight: 620;
+    }
+
+    .side-middle {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 28px;
+    }
+
+    .vertical-name {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: clamp(4.4rem, 7.3vw, 6.6rem);
+      line-height: 0.9;
+      letter-spacing: -0.055em;
+      font-weight: 680;
+      opacity: 0.96;
+    }
+
+    .side-nav {
+      display: grid;
+      gap: 6px;
+      max-width: 260px;
+    }
+
+    .side-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(244, 241, 232, 0.2);
+      font-size: 0.9rem;
+      opacity: 0.72;
+      transition: 0.2s ease;
+    }
+
+    body.dark .side-nav a {
+      border-bottom-color: var(--line);
+    }
+
+    .side-nav a:hover,
+    .side-nav a.active {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .side-bottom {
+      position: relative;
+      z-index: 1;
+      padding: 28px;
+      border-top: 1px solid rgba(244, 241, 232, 0.18);
+    }
+
+    body.dark .side-bottom {
+      border-top-color: var(--line);
+    }
+
+    .side-actions {
+      display: grid;
+      grid-template-columns: 1fr 52px;
+      gap: 10px;
+    }
+
+    .side-btn,
+    .theme-btn,
+    .mobile-menu-btn,
+    .copy-btn {
+      border: 1px solid currentColor;
+      background: transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .side-btn {
+      display: grid;
+      place-items: center;
+      min-height: 52px;
+      padding: 0 16px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+    }
+
+    .theme-btn,
+    .mobile-menu-btn {
+      display: grid;
+      place-items: center;
+      min-height: 52px;
+      font-size: 1.1rem;
+    }
+
+    .side-btn:hover,
+    .theme-btn:hover,
+    .mobile-menu-btn:hover,
+    .copy-btn:hover {
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    body.dark .side-btn:hover,
+    body.dark .theme-btn:hover,
+    body.dark .mobile-menu-btn:hover,
+    body.dark .copy-btn:hover {
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .mobile-topbar {
+      display: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 0;
+      min-height: 92vh;
+      border-bottom: 1px solid var(--line-dark);
+      background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.04));
+    }
+
+    body.dark .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(34px, 6vw, 78px);
+      border-right: 1px solid var(--line);
+    }
+
+    .eyebrow-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 48px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .coordinates {
+      white-space: nowrap;
+    }
+
+    h1 {
+      max-width: 880px;
+      font-size: clamp(5rem, 12.4vw, 11.4rem);
+      line-height: 0.84;
+      letter-spacing: -0.085em;
+      font-weight: 720;
+    }
+
+    .hero-subtitle {
+      max-width: 830px;
+      margin-top: 38px;
+      color: var(--ink-2);
+      font-size: clamp(1.25rem, 2.25vw, 2.05rem);
+      line-height: 1.18;
+      letter-spacing: -0.028em;
+      font-weight: 520;
+    }
+
+    body.dark .hero-subtitle {
+      color: var(--ink-2);
+    }
+
+    .hero-copy {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 54px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero-aside {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      min-height: 100%;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+      padding: 28px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.18);
+    }
+
+    body.dark .metric {
+      background: rgba(255,255,255,0.025);
+    }
+
+    .metric:last-child {
+      border-bottom: 0;
+    }
+
+    .metric small {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.74rem;
+      font-weight: 850;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: clamp(2.25rem, 4.7vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      font-weight: 680;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .section-label {
+      padding: 34px 28px;
+      border-right: 1px solid var(--line);
+      background: rgba(255,255,255,0.14);
+    }
+
+    body.dark .section-label {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .section-label small {
+      display: block;
+      position: sticky;
+      top: 32px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .section-body {
+      padding: clamp(34px, 5vw, 72px);
+    }
+
+    .section-title {
+      max-width: 920px;
+      margin-bottom: 36px;
+      font-size: clamp(2.25rem, 5.1vw, 5.6rem);
+      line-height: 0.98;
+      letter-spacing: -0.062em;
+      font-weight: 650;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 36px;
+      align-items: start;
+    }
+
+    .big-text {
+      color: var(--ink-2);
+      font-size: clamp(1.18rem, 2.2vw, 1.85rem);
+      line-height: 1.22;
+      letter-spacing: -0.028em;
+      font-weight: 500;
+    }
+
+    .plain-text {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .principles {
+      display: grid;
+      gap: 1px;
+      margin-top: 34px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      background: var(--paper);
+    }
+
+    body.dark .principle {
+      background: var(--paper);
+    }
+
+    .principle code {
+      display: grid;
+      place-items: center;
+      border-right: 1px solid var(--line);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+    }
+
+    .principle div {
+      padding: 18px;
+    }
+
+    .principle strong {
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: -0.025em;
+    }
+
+    .principle span {
+      color: var(--muted);
+    }
+
+    .work-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-dark);
+    }
+
+    .job {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .job-meta {
+      padding: 24px 24px 24px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .job-meta small {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      font-weight: 850;
+    }
+
+    .job-meta strong {
+      display: block;
+      font-size: 1.3rem;
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+
+    .job-meta span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .job-content {
+      padding: 24px 0 24px 28px;
+    }
+
+    .job-content h3 {
+      margin-bottom: 12px;
+      font-size: clamp(1.48rem, 2.55vw, 2.15rem);
+      line-height: 1.03;
+      letter-spacing: -0.038em;
+      font-weight: 620;
+    }
+
+    .job-content ul {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      list-style: none;
+    }
+
+    .job-content li {
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .job-content li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.67em;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--ink);
+      transform: rotate(45deg);
+    }
+
+    .toolkit {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      border: 1px solid var(--line-dark);
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    body.dark .toolkit {
+      background: var(--paper-2);
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .tool-card {
+      min-height: 230px;
+      padding: 22px;
+      border-right: 1px solid rgba(244, 241, 232, 0.18);
+      border-bottom: 1px solid rgba(244, 241, 232, 0.18);
+      transition: 0.2s ease;
+    }
+
+    body.dark .tool-card {
+      border-color: var(--line);
+    }
+
+    .tool-card:hover {
+      background: rgba(244, 241, 232, 0.08);
+    }
+
+    body.dark .tool-card:hover {
+      background: rgba(244, 241, 232, 0.04);
+    }
+
+    .tool-card:nth-child(1) { grid-column: span 7; }
+    .tool-card:nth-child(2) { grid-column: span 5; }
+    .tool-card:nth-child(3) { grid-column: span 4; }
+    .tool-card:nth-child(4) { grid-column: span 4; }
+    .tool-card:nth-child(5) { grid-column: span 4; }
+
+    .tool-card h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 26px;
+      font-size: clamp(1.34rem, 2.35vw, 1.95rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 620;
+    }
+
+    .tool-card h3 code {
+      min-width: max-content;
+      color: currentColor;
+      opacity: 0.5;
+      font: 0.8rem ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 8px 10px;
+      border: 1px solid rgba(244, 241, 232, 0.28);
+      color: rgba(244, 241, 232, 0.82);
+      font-size: 0.88rem;
+    }
+
+    body.dark .tag {
+      border-color: var(--line);
+      color: var(--muted);
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line-dark);
+      border-left: 1px solid var(--line);
+    }
+
+    .edu {
+      min-height: 210px;
+      padding: 22px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.12);
+    }
+
+    body.dark .edu {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .edu small {
+      display: block;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-weight: 850;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    .edu h3 {
+      font-size: 1.28rem;
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 440px;
+      border: 1px solid var(--line-dark);
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    body.dark .contact-panel {
+      background: var(--paper-2);
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .contact-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(28px, 5vw, 56px);
+      border-right: 1px solid rgba(244, 241, 232, 0.18);
+    }
+
+    body.dark .contact-main {
+      border-right-color: var(--line);
+    }
+
+    .contact-main h2 {
+      max-width: 720px;
+      font-size: clamp(2.8rem, 5.6vw, 6.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      font-weight: 680;
+    }
+
+    .contact-main p {
+      max-width: 560px;
+      margin-top: 28px;
+      color: rgba(244, 241, 232, 0.72);
+      font-size: 1.08rem;
+    }
+
+    body.dark .contact-main p {
+      color: var(--muted);
+    }
+
+    .contact-links {
+      display: grid;
+    }
+
+    .contact-link {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      min-height: 112px;
+      padding: 24px;
+      border-bottom: 1px solid rgba(244, 241, 232, 0.18);
+      transition: 0.2s ease;
+    }
+
+    body.dark .contact-link {
+      border-bottom-color: var(--line);
+    }
+
+    .contact-link:hover {
+      background: rgba(244, 241, 232, 0.08);
+    }
+
+    .contact-link small {
+      color: rgba(244, 241, 232, 0.55);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    body.dark .contact-link small {
+      color: var(--muted);
+    }
+
+    .contact-link strong {
+      word-break: break-word;
+      font-size: 1.06rem;
+    }
+
+    .copy-btn {
+      width: 42px;
+      height: 42px;
+      color: currentColor;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 24px clamp(24px, 5vw, 72px);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 160;
+      max-width: 320px;
+      padding: 14px 16px;
+      border: 1px solid var(--line-dark);
+      color: var(--paper);
+      background: var(--ink);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    body.dark .toast {
+      color: var(--ink);
+      background: var(--paper-2);
+      border-color: var(--line);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1120px) {
+      :root {
+        --sidebar: 300px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-main {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-aside {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: none;
+      }
+
+      .metric {
+        min-height: 190px;
+        border-right: 1px solid var(--line);
+        border-bottom: 0;
+      }
+
+      .metric:last-child {
+        border-right: 0;
+      }
+
+      .section {
+        grid-template-columns: 190px 1fr;
+      }
+
+      .tool-card:nth-child(n) {
+        grid-column: span 6;
+      }
+
+      .education-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        border: 0;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .mobile-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 80;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 68px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--line-dark);
+        color: var(--paper);
+        background: var(--ink);
+      }
+
+      body.dark .mobile-topbar {
+        color: var(--ink);
+        background: var(--paper-2);
+      }
+
+      .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 850;
+        letter-spacing: -0.03em;
+      }
+
+      .mobile-brand span {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        font-size: 0.78rem;
+      }
+
+      .mobile-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        inset: 68px 0 auto 0;
+        z-index: 70;
+        display: none;
+        padding: 10px 16px 18px;
+        border-bottom: 1px solid var(--line-dark);
+        color: var(--paper);
+        background: var(--ink);
+      }
+
+      body.dark .mobile-menu {
+        color: var(--ink);
+        background: var(--paper-2);
+      }
+
+      .mobile-menu.open {
+        display: grid;
+      }
+
+      .mobile-menu a {
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(244, 241, 232, 0.22);
+      }
+
+      body.dark .mobile-menu a {
+        border-bottom-color: var(--line);
+      }
+
+      .hero {
+        border-bottom: 1px solid var(--line-dark);
+      }
+
+      .section {
+        display: block;
+      }
+
+      .section-label {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 20px 24px;
+      }
+
+      .section-label small {
+        position: static;
+      }
+
+      .intro-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-main {
+        border-right: 0;
+        border-bottom: 1px solid rgba(244, 241, 232, 0.18);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-main,
+      .section-body {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: clamp(4.4rem, 24vw, 7rem);
+      }
+
+      .eyebrow-row,
+      .hero-copy,
+      .job,
+      .hero-aside,
+      .education-grid,
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .eyebrow-row,
+      .footer {
+        display: grid;
+      }
+
+      .metric {
+        min-height: 150px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .metric:last-child {
+        border-bottom: 0;
+      }
+
+      .job-meta {
+        padding: 22px 0 16px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .job-content {
+        padding: 20px 0 26px;
+      }
+
+      .toolkit {
+        display: block;
+      }
+
+      .tool-card {
+        min-height: auto;
+        border-right: 0;
+      }
+
+      .contact-link {
+        grid-template-columns: 1fr auto;
+      }
+
+      .contact-link small {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff !important;
+        color: #111 !important;
+      }
+
+      .page-progress,
+      .sidebar,
+      .mobile-topbar,
+      .mobile-menu,
+      .toast,
+      .side-actions,
+      .copy-btn {
+        display: none !important;
+      }
+
+      .layout,
+      .hero,
+      .section,
+      .job,
+      .intro-grid,
+      .education-grid,
+      .contact-panel {
+        display: block !important;
+        border: 0 !important;
+        background: #fff !important;
+      }
+
+      .hero-main,
+      .section-body,
+      .section-label,
+      .job-meta,
+      .job-content,
+      .contact-main,
+      .contact-link,
+      .tool-card,
+      .edu {
+        border-color: #ccc !important;
+        background: #fff !important;
+        color: #111 !important;
+      }
+
+      .section-label {
+        padding: 18px 0 6px;
+      }
+
+      .section-body,
+      .hero-main {
+        padding: 20px 0;
+      }
+
+      .toolkit,
+      .contact-panel {
+        color: #111 !important;
+        background: #fff !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-progress" id="pageProgress" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="mobile-topbar">
+    <a class="mobile-brand" href="#top"><span>AB</span> Antonio Belan</a>
+    <div class="mobile-actions">
+      <button class="theme-btn" id="mobileTheme" type="button" aria-label="Promijeni temu">◐</button>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Otvori meni">☰</button>
+    </div>
+  </div>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobilna navigacija">
+    <a href="#experience">Iskustvo</a>
+    <a href="#profile">Profil</a>
+    <a href="#skills">Vještine</a>
+    <a href="#education">Edukacija</a>
+    <a href="#contact">Kontakt</a>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-top">
+        <a href="#top" class="monogram">AB</a>
+        <div class="side-title">Portfolio CV / 2026</div>
+        <div class="side-role">Cross-Platform Developer</div>
+      </div>
+
+      <div class="side-middle">
+        <div class="vertical-name">Antonio Belan</div>
+        <nav class="side-nav" aria-label="Glavna navigacija">
+          <a href="#experience">Iskustvo <span>01</span></a>
+          <a href="#profile">Profil <span>02</span></a>
+          <a href="#skills">Vještine <span>03</span></a>
+          <a href="#education">Edukacija <span>04</span></a>
+          <a href="#contact">Kontakt <span>05</span></a>
+        </nav>
+      </div>
+
+      <div class="side-bottom">
+        <div class="side-actions">
+          <button class="side-btn" type="button" onclick="window.print()">Ispiši CV</button>
+          <button class="theme-btn" id="themeToggle" type="button" aria-label="Promijeni temu">◐</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content" id="top">
+      <section class="hero" aria-label="Uvod">
+        <div class="hero-main reveal">
+          <div>
+            <div class="eyebrow-row">
+              <span>Available · Zagreb, Croatia</span>
+              <span class="coordinates">45.8150° N / 15.9819° E</span>
+            </div>
+
+            <h1>Antonio<br>Belan</h1>
+            <p class="hero-subtitle">
+              Cross-Platform Developer fokusiran na web development, API integracije, mobilne aplikacije, React Native, Supabase, JavaScript frameworkove i stabilan digital delivery.
+            </p>
+          </div>
+
+          <div class="hero-copy">
+            <p>
+              Razvijam, održavam i optimiziram web stranice, API-je i aplikacijska rješenja koristeći PHP, JavaScript, HTML/CSS, SQL,
+              WordPress, React Native, Supabase i različite JavaScript frameworkove.
+            </p>
+            <p>
+              Fokus mi je na čistoj implementaciji, debugganju, performansama, održivosti sustava i komunikaciji s klijentima
+              od tehničkog zahtjeva do finalne isporuke.
+            </p>
+          </div>
+        </div>
+
+        <aside class="hero-aside reveal">
+          <div class="metric">
+            <small>Web maintenance</small>
+            <div><strong data-count="45">0</strong><span>aktivnih web stranica</span></div>
+          </div>
+          <div class="metric">
+            <small>Systems</small>
+            <div><strong>API</strong><span>integracije i automatizacija procesa</span></div>
+          </div>
+          <div class="metric">
+            <small>Cross-platform</small>
+            <div><strong>APP</strong><span>mobilne aplikacije i backend povezivanje</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="experience" class="section">
+        <div class="section-label"><small>01 / Iskustvo</small></div>
+        <div class="section-body">
+          <h2 class="section-title reveal">Praktično iskustvo kroz development, organizaciju i komunikaciju.</h2>
+
+          <div class="work-list">
+            <article class="job reveal">
+              <div class="job-meta">
+                <small>Listopad 2023. — trenutno</small>
+                <strong>DEMODE</strong>
+                <span>Zagreb · puno radno vrijeme</span>
+              </div>
+              <div class="job-content">
+                <h3>Cross-Platform Developer</h3>
+                <ul>
+                  <li>Razvijam, održavam i optimiziram web stranice, API-je i mobilne aplikacije koristeći PHP, JavaScript, HTML/CSS, SQL, WordPress, React Native, Supabase i različite JavaScript frameworkove.</li>
+                  <li>Održavam portfolio od 45 aktivnih web stranica, uključujući debugging, tehničku podršku, optimizaciju performansi i implementaciju novih funkcionalnosti.</li>
+                  <li>Razvijam i integriram API rješenja za povezivanje sustava, automatizaciju procesa i proširenje funkcionalnosti postojećih web platformi.</li>
+                  <li>Sudjelujem u razvoju mobilnih aplikacija, uključujući rad s React Nativeom, implementaciju funkcionalnosti, testiranje i povezivanje s backend sustavima poput Supabasea.</li>
+                  <li>Izrađujem custom WordPress rješenja, plugine i funkcionalnosti prema zahtjevima klijenata.</li>
+                  <li>Vodim projekte od početne ideje do završne isporuke, uključujući komunikaciju s klijentima, organizaciju zadataka i koordinaciju izvedbe.</li>
+                  <li>Po potrebi izrađujem i prilagođavam web vizuale, UI elemente i osnovne dizajnerske materijale koristeći Adobe Photoshop, Illustrator, Adobe XD, CorelDraw, Canvu i Adobe Express.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="job reveal">
+              <div class="job-meta">
+                <small>Kolovoz 2021. — Travanj 2022.</small>
+                <strong>The Old Irish Pub</strong>
+                <span>Copenhagen · nepuno radno vrijeme</span>
+              </div>
+              <div class="job-content">
+                <h3>Konobar / Menadžer</h3>
+                <ul>
+                  <li>Posluživanje gostiju, svakodnevna komunikacija s klijentima i održavanje standarda prostora.</li>
+                  <li>Od rujna 2021. promoviran u menadžera, odgovoran za pripremu puba, dostave, administraciju, raspored konobara i organizaciju događaja.</li>
+                  <li>Razvio organizacijske, timske, komunikacijske i administrativne vještine kroz rad u dinamičnom međunarodnom okruženju.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="job reveal">
+              <div class="job-meta">
+                <small>Listopad 2019. — Srpanj 2020.</small>
+                <strong>A1 Telekomunikacije</strong>
+                <span>Zagreb · puno radno vrijeme</span>
+              </div>
+              <div class="job-content">
+                <h3>Agent korisničke podrške</h3>
+                <ul>
+                  <li>Prodaja A1 usluga, odgovaranje na upite klijenata i rješavanje pitanja vezanih za račune, ponude i mobilnu mrežu.</li>
+                  <li>Pružanje podrške novim kolegama kroz pomoć u poslu i coaching za poboljšanje prodajnih rezultata.</li>
+                  <li>Postigao najviše prodajne rezultate i najviše pozitivnih ocjena od strane klijenata.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile" class="section">
+        <div class="section-label"><small>02 / Profil</small></div>
+        <div class="section-body">
+          <h2 class="section-title reveal">Development-first. Dizajn kao dodatna prednost.</h2>
+
+          <div class="intro-grid compact-profile">
+            <p class="big-text reveal">
+              Gradim i održavam web stranice, API integracije i mobilna rješenja koristeći web tehnologije, React Native, Supabase i JavaScript ekosustav — s fokusom na stabilnost, performanse i jasnu tehničku logiku.
+            </p>
+            <div class="principles reveal">
+              <div class="principle">
+                <code>01</code>
+                <div><strong>Web / WordPress</strong><span>45 aktivnih stranica, custom funkcionalnosti i optimizacija.</span></div>
+              </div>
+              <div class="principle">
+                <code>02</code>
+                <div><strong>API / Mobile</strong><span>React Native, Supabase, povezivanje sustava i aplikacijska logika.</span></div>
+              </div>
+              <div class="principle">
+                <code>03</code>
+                <div><strong>Design support</strong><span>UX/UI i vizuali kao podrška boljem proizvodu, ne glavni fokus.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="section-label"><small>03 / Vještine</small></div>
+        <div class="section-body">
+          <h2 class="section-title reveal">Core development stack.</h2>
+
+          <div class="toolkit reveal">
+            <div class="tool-card">
+              <h3>Development <code>primary</code></h3>
+              <div class="tags">
+                <span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">SQL</span><span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">JS frameworkovi</span><span class="tag">Debugging</span><span class="tag">Performance</span>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <h3>API & Integrations <code>systems</code></h3>
+              <div class="tags">
+                <span class="tag">API integracije</span><span class="tag">Supabase</span><span class="tag">Povezivanje sustava</span><span class="tag">Backend povezivanje</span><span class="tag">Custom funkcionalnosti</span>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <h3>Mobile & Cross-platform <code>apps</code></h3>
+              <div class="tags">
+                <span class="tag">React Native</span><span class="tag">Mobilne aplikacije</span><span class="tag">Cross-platform razvoj</span><span class="tag">Testiranje</span><span class="tag">Aplikacijska logika</span>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <h3>Delivery <code>ops</code></h3>
+              <div class="tags">
+                <span class="tag">Vođenje projekata</span><span class="tag">Komunikacija s klijentima</span><span class="tag">Organizacija</span><span class="tag">Problem solving</span>
+              </div>
+            </div>
+
+            <div class="tool-card supporting-card">
+              <h3>Design support <code>secondary</code></h3>
+              <div class="tags">
+                <span class="tag">UX/UI osnove</span><span class="tag">Adobe tools</span><span class="tag">Web vizuali</span><span class="tag">Canva</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="section">
+        <div class="section-label"><small>04 / Edukacija</small></div>
+        <div class="section-body">
+          <h2 class="section-title reveal">Edukacija & certifikati.</h2>
+
+          <div class="education-grid reveal">
+            <article class="edu">
+              <small>Kolovoz 2022.</small>
+              <h3>HubSpot Academy — Digital Marketing</h3>
+            </article>
+            <article class="edu">
+              <small>Prosinac 2022.</small>
+              <h3>Google Digital Marketing and E-Commerce</h3>
+            </article>
+            <article class="edu">
+              <small>Siječanj 2023.</small>
+              <h3>Google Data Analytics</h3>
+            </article>
+            <article class="edu">
+              <small>Listopad 2024.</small>
+              <h3>Pontis Technologies DevCamp</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="section-label"><small>05 / Kontakt</small></div>
+        <div class="section-body">
+          <div class="contact-panel reveal">
+            <div class="contact-main">
+              <div>
+                <h2>Let’s build something useful.</h2>
+                <p>Fokus: web development, API integracije, React Native mobilna rješenja, Supabase, optimizacija i pouzdana tehnička isporuka.</p>
+              </div>
+              <p>Zagreb, Hrvatska · hrvatski / engleski / osnovni njemački</p>
+            </div>
+
+            <div class="contact-links">
+              <a class="contact-link" href="mailto:antonio.belan4@gmail.com">
+                <small>E-mail</small>
+                <strong>antonio.belan4@gmail.com</strong>
+                <button class="copy-btn" type="button" data-copy="antonio.belan4@gmail.com" aria-label="Kopiraj e-mail">↗</button>
+              </a>
+              <a class="contact-link" href="tel:+385912254813">
+                <small>Telefon</small>
+                <strong>+385 91 225 4813</strong>
+                <button class="copy-btn" type="button" data-copy="+385 91 225 4813" aria-label="Kopiraj telefon">↗</button>
+              </a>
+              <div class="contact-link">
+                <small>Lokacija</small>
+                <strong>Zagreb, Croatia</strong>
+                <span>⌁</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>© <span id="year"></span> Antonio Belan</span>
+        <code>single-file HTML / CSS / JS</code>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const body = document.body;
+    const pageProgress = document.getElementById('pageProgress');
+    const toast = document.getElementById('toast');
+    const themeToggle = document.getElementById('themeToggle');
+    const mobileTheme = document.getElementById('mobileTheme');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = [...document.querySelectorAll('.side-nav a, .mobile-menu a')];
+    const sections = [...document.querySelectorAll('section[id]')];
+    const revealItems = [...document.querySelectorAll('.reveal')];
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    if (localStorage.getItem('antonio-theme') === 'dark') {
+      body.classList.add('dark');
+    }
+
+    function toggleTheme() {
+      body.classList.toggle('dark');
+      localStorage.setItem('antonio-theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    themeToggle?.addEventListener('click', toggleTheme);
+    mobileTheme?.addEventListener('click', toggleTheme);
+
+    mobileMenuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      mobileMenuBtn.textContent = mobileMenu.classList.contains('open') ? '×' : '☰';
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        mobileMenuBtn.textContent = '☰';
+      });
+    });
+
+    function updateProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      pageProgress.style.width = max > 0 ? `${(scrollTop / max) * 100}%` : '0%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, { rootMargin: '-38% 0px -52% 0px', threshold: 0 });
+
+    sections.forEach(section => navObserver.observe(section));
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    document.querySelectorAll('[data-copy]').forEach(button => {
+      button.addEventListener('click', async event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const value = button.getAttribute('data-copy');
+        try {
+          await navigator.clipboard.writeText(value);
+          showToast(`Kopirano: ${value}`);
+        } catch (error) {
+          showToast('Kopiranje nije uspjelo. Kopiraj ručno.');
+        }
+      });
+    });
+
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(counter => {
+        if (counter.dataset.done) return;
+        counter.dataset.done = 'true';
+        const target = Number(counter.dataset.count);
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 34));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            counter.textContent = target;
+            clearInterval(timer);
+          } else {
+            counter.textContent = current;
+          }
+        }, 28);
+      });
+    }
+
+    const metricObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          metricObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.35 });
+
+    metricObserver.observe(document.querySelector('.hero-aside'));
+  </script>
+</body>
+</html>
+
+

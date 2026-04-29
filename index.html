@@ -413,6 +413,65 @@
       color: var(--paper);
       box-shadow: 8px 8px 0 var(--line);
     }
+
+    .cv-switch {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 150;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.74rem;
+      font-weight: 850;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: 6px 6px 0 var(--line);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cv-switch::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: #ffe600;
+      border: 1px solid currentColor;
+    }
+
+    .cv-switch::after {
+      content: "↗";
+      font-size: 0.95rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .cv-switch:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 9px 9px 0 var(--line);
+    }
+
+    .cv-switch:hover::after {
+      transform: translate(2px, -2px);
+    }
+
+    body.dark .cv-switch {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    @media (max-width: 640px) {
+      .cv-switch {
+        right: 14px;
+        bottom: 14px;
+        padding: 10px 12px;
+        font-size: 0.68rem;
+      }
+    }
     .hero-copy p {
       color: var(--muted);
       font-size: 1.02rem;
@@ -755,8 +814,8 @@
 
     .contact-panel {
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
-      min-height: 440px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.85fr);
+      min-height: 480px;
       border: 1px solid var(--line-dark);
       background: var(--ink);
       color: var(--paper);
@@ -772,7 +831,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(28px, 5vw, 56px);
+      gap: 48px;
+      padding: clamp(32px, 5vw, 64px);
       border-right: 1px solid rgba(244, 241, 232, 0.18);
     }
 
@@ -788,28 +848,64 @@
       font-weight: 680;
     }
 
-    .contact-main p {
-      max-width: 760px;
-      margin-top: 28px;
+    .contact-main h2 + p {
+      max-width: 520px;
+      margin-top: 24px;
       color: rgba(244, 241, 232, 0.72);
-      font-size: 1.08rem;
+      font-size: 1.04rem;
+      line-height: 1.5;
     }
 
-    body.dark .contact-main p {
+    body.dark .contact-main h2 + p {
       color: var(--muted);
+    }
+
+    .contact-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(244, 241, 232, 0.18);
+    }
+
+    body.dark .contact-meta {
+      border-top-color: var(--line);
+    }
+
+    .contact-meta div small {
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(244, 241, 232, 0.5);
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    body.dark .contact-meta div small {
+      color: var(--muted);
+    }
+
+    .contact-meta div strong {
+      display: block;
+      font-size: 0.98rem;
+      letter-spacing: -0.02em;
+      font-weight: 600;
     }
 
     .contact-links {
       display: grid;
+      grid-auto-rows: 1fr;
     }
 
     .contact-link {
       display: grid;
-      grid-template-columns: 120px 1fr auto;
-      gap: 16px;
-      align-items: center;
-      min-height: 112px;
-      padding: 24px;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      column-gap: 16px;
+      row-gap: 6px;
+      align-content: center;
+      padding: 28px clamp(24px, 3vw, 32px);
       border-bottom: 1px solid rgba(244, 241, 232, 0.18);
       transition: 0.2s ease;
     }
@@ -818,15 +914,20 @@
       border-bottom-color: var(--line);
     }
 
+    .contact-link:last-child {
+      border-bottom: 0;
+    }
+
     .contact-link:hover {
       background: rgba(244, 241, 232, 0.08);
     }
 
     .contact-link small {
-      color: rgba(244, 241, 232, 0.55);
-      font-size: 0.72rem;
+      grid-column: 1 / 2;
+      color: rgba(244, 241, 232, 0.5);
+      font-size: 0.7rem;
       font-weight: 850;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
 
@@ -835,8 +936,16 @@
     }
 
     .contact-link strong {
+      grid-column: 1 / 2;
       word-break: break-word;
-      font-size: 1.06rem;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-link .copy-btn {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+      align-self: center;
     }
 
     .copy-btn {
@@ -1126,6 +1235,7 @@
       .mobile-menu,
       .toast,
       .alt-cv-link,
+      .cv-switch,
       .side-actions,
       .copy-btn {
         display: none !important;
@@ -1177,6 +1287,7 @@
 <body>
   <div class="page-progress" id="pageProgress" aria-hidden="true"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a class="cv-switch" href="cv-brutalist.html" aria-label="Prebaci na brutalist verziju CV-a">Brutalist verzija</a>
 
   <div class="mobile-topbar">
     <a class="mobile-brand" href="#top"><span>AB</span> Antonio Belan</a>
@@ -1234,16 +1345,6 @@
             <p class="hero-subtitle">
               Radim na web stranicama, API integracijama i mobilnim aplikacijama. PHP, JavaScript/TypeScript, WordPress, Next.js, React Native, Expo, Supabase, Postgres i Vercel.
             </p>
-            <a class="alt-cv-link" href="cv-brutalist.html" target="_blank" rel="noopener">Pogledaj drugu stranu</a>
-          </div>
-
-          <div class="hero-copy">
-            <p>
-              Održavam portfelj od 45 aktivnih web stranica, razvijam custom WordPress rješenja, pišem API integracije i povezujem mobilne aplikacije s backendom.
-            </p>
-            <p>
-              Volim kad kod radi stabilno, brzo i bez nepotrebne komplikacije. Klijentima pomažem od ideje do isporuke.
-            </p>
           </div>
         </div>
 
@@ -1280,11 +1381,28 @@
                 <ul>
                   <li>Svakodnevno radim na webu, API-jima i mobilnim aplikacijama. U stacku su uglavnom PHP, JavaScript/TypeScript, HTML/CSS i SQL/Postgres, a od framework strane WordPress, Next.js, React Native i Expo, plus Supabase i Vercel kad treba backend i hosting.</li>
                   <li>Vodim portfelj od oko 45 aktivnih stranica — to ide od bug fixeva i tehničke podrške, do vraćanja brzine kad neka stranica počne usporavati i dodavanja novih dijelova kad ih klijent zatraži.</li>
+                  <li>Postavio interne alate, predloške i workflow koji su znatno ubrzali izradu novih stranica, featurea i projekata — ono što je prije trajalo danima sad se često složi u par sati.</li>
+                  <li>Razvio festival aplikaciju u React Nativeu i povezao je s WordPress stranicom kao izvorom podataka (program, izvođači, lokacije, novosti) preko REST API-ja.</li>
                   <li>Pišem API integracije između sustava, uglavnom da bi se posao koji se prije radio ručno počeo raditi sam.</li>
                   <li>U mobilnom dijelu radim u React Nativeu (Expo workflow) i vežem aplikacije na Supabase/Postgres — auth, baza, storage, realtime.</li>
                   <li>Radim custom WordPress kad gotovi plugini ne pokrivaju slučaj: vlastite plugine, custom blokove i prilagodbe teme.</li>
                   <li>Projekte uglavnom vodim sam s klijentom — od prvog razgovora pa do toga da je stranica online i da netko zna kako dalje.</li>
-                  <li>Kad zatreba, napravim i osnovne vizuale (Photoshop, Illustrator, Adobe XD, povremeno CorelDraw, Canva ili Adobe Express).</li>
+                  <li>Bavim se i UI/UX dijelom — od wireframea i toka kroz aplikaciju do finalnog dizajna i vizuala (Figma, Adobe XD, Photoshop, Illustrator).</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="job reveal">
+              <div class="job-meta">
+                <small>Kontinuirano · slobodno vrijeme</small>
+                <strong>Osobni projekti</strong>
+                <span>Zagreb · side work</span>
+              </div>
+              <div class="job-content">
+                <h3>Custom development & R&amp;D</h3>
+                <ul>
+                  <li>U slobodno vrijeme stalno radim na vlastitim projektima: mobilna fitness aplikacija, custom WordPress plugini, CRM sustavi i financijski sustavi u Next.js + Postgres (Supabase), uz niz manjih alata.</li>
+                  <li>Kroz te projekte testiram nove tehnologije, alate i AI sustave da vidim što stvarno funkcionira i što se isplati uvesti u redovni rad.</li>
                 </ul>
               </div>
             </article>
@@ -1428,9 +1546,18 @@
             <div class="contact-main">
               <div>
                 <h2>Javi se.</h2>
-                <p>Dostupan za web projekte, API integracije, Next.js / TypeScript / React Native / Expo aplikacije i WordPress rješenja s Postgres backendom.</p>
+                <p>Web, API integracije i mobilne aplikacije — od ideje do isporuke.</p>
               </div>
-              <p>Zagreb, Hrvatska · hrvatski / engleski / osnovni njemački</p>
+              <div class="contact-meta">
+                <div>
+                  <small>Lokacija</small>
+                  <strong>Zagreb, Hrvatska</strong>
+                </div>
+                <div>
+                  <small>Jezici</small>
+                  <strong>Hrvatski / Engleski</strong>
+                </div>
+              </div>
             </div>
 
             <div class="contact-links">
@@ -1444,11 +1571,6 @@
                 <strong>+385 91 225 4813</strong>
                 <button class="copy-btn" type="button" data-copy="+385 91 225 4813" aria-label="Kopiraj telefon">↗</button>
               </a>
-              <div class="contact-link">
-                <small>Lokacija</small>
-                <strong>Zagreb, Croatia</strong>
-                <span>⌁</span>
-              </div>
             </div>
           </div>
         </div>

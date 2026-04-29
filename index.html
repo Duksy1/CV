@@ -364,6 +364,55 @@
       border-top: 1px solid var(--line);
     }
 
+    .alt-cv-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: fit-content;
+      margin-top: 26px;
+      padding: 13px 18px 13px 16px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.78rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: 0.22s ease;
+      box-shadow: 8px 8px 0 var(--line);
+    }
+    
+    .alt-cv-link::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #ffe600;
+      border: 1px solid currentColor;
+    }
+    
+    .alt-cv-link::after {
+      content: "↗";
+      font-size: 1rem;
+      line-height: 1;
+      transition: transform 0.22s ease;
+    }
+    
+    .alt-cv-link:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0 var(--line);
+    }
+    
+    .alt-cv-link:hover::after {
+      transform: translate(3px, -3px);
+    }
+    
+    body.dark .alt-cv-link {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 8px 8px 0 var(--line);
+    }
     .hero-copy p {
       color: var(--muted);
       font-size: 1.02rem;
@@ -706,7 +755,7 @@
 
     .contact-panel {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
       min-height: 440px;
       border: 1px solid var(--line-dark);
       background: var(--ink);
@@ -740,7 +789,7 @@
     }
 
     .contact-main p {
-      max-width: 560px;
+      max-width: 760px;
       margin-top: 28px;
       color: rgba(244, 241, 232, 0.72);
       font-size: 1.08rem;
@@ -1076,6 +1125,7 @@
       .mobile-topbar,
       .mobile-menu,
       .toast,
+      .alt-cv-link,
       .side-actions,
       .copy-btn {
         display: none !important;
@@ -1182,8 +1232,9 @@
 
             <h1>Antonio<br>Belan</h1>
             <p class="hero-subtitle">
-              Radim na web stranicama, API integracijama i mobilnim aplikacijama. PHP, JavaScript, WordPress, React Native i Supabase.
+              Radim na web stranicama, API integracijama i mobilnim aplikacijama. PHP, JavaScript/TypeScript, WordPress, Next.js, React Native, Expo, Supabase, Postgres i Vercel.
             </p>
+            <a class="alt-cv-link" href="cv-brutalist.html" target="_blank" rel="noopener">Pogledaj drugu stranu</a>
           </div>
 
           <div class="hero-copy">
@@ -1227,13 +1278,13 @@
               <div class="job-content">
                 <h3>Cross-Platform Developer</h3>
                 <ul>
-                  <li>Razvijam, održavam i optimiziram web stranice, API-je i mobilne aplikacije koristeći PHP, JavaScript, HTML/CSS, SQL, WordPress, React Native, Supabase i različite JavaScript frameworkove.</li>
-                  <li>Održavam portfolio od 45 aktivnih web stranica, uključujući debugging, tehničku podršku, optimizaciju performansi i implementaciju novih funkcionalnosti.</li>
-                  <li>Razvijam i integriram API rješenja za povezivanje sustava, automatizaciju procesa i proširenje funkcionalnosti postojećih web platformi.</li>
-                  <li>Sudjelujem u razvoju mobilnih aplikacija, uključujući rad s React Nativeom, implementaciju funkcionalnosti, testiranje i povezivanje s backend sustavima poput Supabasea.</li>
-                  <li>Izrađujem custom WordPress rješenja, plugine i funkcionalnosti prema zahtjevima klijenata.</li>
-                  <li>Vodim projekte od početne ideje do završne isporuke, uključujući komunikaciju s klijentima, organizaciju zadataka i koordinaciju izvedbe.</li>
-                  <li>Po potrebi izrađujem i prilagođavam web vizuale, UI elemente i osnovne dizajnerske materijale koristeći Adobe Photoshop, Illustrator, Adobe XD, CorelDraw, Canvu i Adobe Express.</li>
+                  <li>Svakodnevno radim na webu, API-jima i mobilnim aplikacijama. U stacku su uglavnom PHP, JavaScript/TypeScript, HTML/CSS i SQL/Postgres, a od framework strane WordPress, Next.js, React Native i Expo, plus Supabase i Vercel kad treba backend i hosting.</li>
+                  <li>Vodim portfelj od oko 45 aktivnih stranica — to ide od bug fixeva i tehničke podrške, do vraćanja brzine kad neka stranica počne usporavati i dodavanja novih dijelova kad ih klijent zatraži.</li>
+                  <li>Pišem API integracije između sustava, uglavnom da bi se posao koji se prije radio ručno počeo raditi sam.</li>
+                  <li>U mobilnom dijelu radim u React Nativeu (Expo workflow) i vežem aplikacije na Supabase/Postgres — auth, baza, storage, realtime.</li>
+                  <li>Radim custom WordPress kad gotovi plugini ne pokrivaju slučaj: vlastite plugine, custom blokove i prilagodbe teme.</li>
+                  <li>Projekte uglavnom vodim sam s klijentom — od prvog razgovora pa do toga da je stranica online i da netko zna kako dalje.</li>
+                  <li>Kad zatreba, napravim i osnovne vizuale (Photoshop, Illustrator, Adobe XD, povremeno CorelDraw, Canva ili Adobe Express).</li>
                 </ul>
               </div>
             </article>
@@ -1247,9 +1298,9 @@
               <div class="job-content">
                 <h3>Konobar / Menadžer</h3>
                 <ul>
-                  <li>Posluživanje gostiju, svakodnevna komunikacija s klijentima i održavanje standarda prostora.</li>
-                  <li>Od rujna 2021. promoviran u menadžera, odgovoran za pripremu puba, dostave, administraciju, raspored konobara i organizaciju događaja.</li>
-                  <li>Razvio organizacijske, timske, komunikacijske i administrativne vještine kroz rad u dinamičnom međunarodnom okruženju.</li>
+                  <li>Počeo sam kao konobar: posluga, komunikacija s gostima iz cijelog svijeta i održavanje reda u prostoru.</li>
+                  <li>Nakon nekih mjesec dana preuzeo sam i menadžerski dio — otvaranje puba, dostave, smjene konobara, papirologija i sitnija događanja.</li>
+                  <li>Najviše mi je dalo iskustvo rada pod pritiskom i vođenja malog tima na stranom jeziku. Taj dio mi se danas vraća u radu s klijentima.</li>
                 </ul>
               </div>
             </article>
@@ -1263,9 +1314,9 @@
               <div class="job-content">
                 <h3>Agent korisničke podrške</h3>
                 <ul>
-                  <li>Prodaja A1 usluga, odgovaranje na upite klijenata i rješavanje pitanja vezanih za račune, ponude i mobilnu mrežu.</li>
-                  <li>Pružanje podrške novim kolegama kroz pomoć u poslu i coaching za poboljšanje prodajnih rezultata.</li>
-                  <li>Postigao najviše prodajne rezultate i najviše pozitivnih ocjena od strane klijenata.</li>
+                  <li>Prodavao sam A1 usluge i rješavao upite oko računa, tarifa i mreže. Dosta posla je u praksi bilo gašenje vatre na telefonu — živi ljudi, živi problemi.</li>
+                  <li>Kasnije sam pomagao novim kolegama kad su ulazili u smjenu, više neformalno nego kao formalan trener.</li>
+                  <li>U jednom kvartalu sam imao i najbolje prodajne brojke i najbolje ocjene klijenata u timu, što mi je tada bilo važnije od bilo kakvog bonusa.</li>
                 </ul>
               </div>
             </article>
@@ -1280,20 +1331,20 @@
 
           <div class="intro-grid compact-profile">
             <p class="big-text reveal">
-              Developer sam s naglaskom na web, API i mobilna rješenja. Dizajn radim kad je potrebno, ali fokus je na kodu koji funkcionira.
+              Najradije radim na stvarima koje se ne moraju svaki tjedan prepravljati. Web, API i mobilne aplikacije — ali kroz prizmu da ono što napravim mora ići dalje sa što manje moje pažnje.
             </p>
             <div class="principles reveal">
               <div class="principle">
                 <code>01</code>
-                <div><strong>Web / WordPress</strong><span>45 aktivnih stranica, custom funkcionalnosti i optimizacija.</span></div>
+                <div><strong>Web / WordPress</strong><span>Oko 45 aktivnih stranica koje već godinama držim u zraku, plus povremeni novi launch.</span></div>
               </div>
               <div class="principle">
                 <code>02</code>
-                <div><strong>API / Mobile</strong><span>React Native, Supabase, povezivanje sustava i aplikacijska logika.</span></div>
+                <div><strong>API / Mobile</strong><span>Next.js, TypeScript, React Native i Expo s prednje strane, Supabase/Postgres pozadi, Vercel za hosting kad ima smisla.</span></div>
               </div>
               <div class="principle">
                 <code>03</code>
-                <div><strong>Dizajn</strong><span>UX/UI i vizuali kao podrška proizvodu.</span></div>
+                <div><strong>Dizajn</strong><span>Nisam dizajner, ali znam dovoljno da stvar ne izgleda loše dok čekamo onog pravog.</span></div>
               </div>
             </div>
           </div>
@@ -1309,21 +1360,21 @@
             <div class="tool-card">
               <h3>Development</h3>
               <div class="tags">
-                <span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">SQL</span><span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">JS frameworkovi</span><span class="tag">Debugging</span><span class="tag">Performance</span>
+                <span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">HTML/CSS</span><span class="tag">SQL</span><span class="tag">Postgres</span><span class="tag">WordPress</span><span class="tag">Next.js</span><span class="tag">Elementor</span><span class="tag">JS frameworkovi</span><span class="tag">Debugging</span><span class="tag">Performance</span>
               </div>
             </div>
 
             <div class="tool-card">
               <h3>API i integracije</h3>
               <div class="tags">
-                <span class="tag">API integracije</span><span class="tag">Supabase</span><span class="tag">Povezivanje sustava</span><span class="tag">Backend povezivanje</span><span class="tag">Custom funkcionalnosti</span>
+                <span class="tag">API integracije</span><span class="tag">Supabase</span><span class="tag">Postgres</span><span class="tag">Vercel</span><span class="tag">Povezivanje sustava</span><span class="tag">Backend povezivanje</span><span class="tag">Custom funkcionalnosti</span>
               </div>
             </div>
 
             <div class="tool-card">
               <h3>Mobile i cross-platform</h3>
               <div class="tags">
-                <span class="tag">React Native</span><span class="tag">Mobilne aplikacije</span><span class="tag">Cross-platform razvoj</span><span class="tag">Testiranje</span><span class="tag">Aplikacijska logika</span>
+                <span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Mobilne aplikacije</span><span class="tag">Cross-platform razvoj</span><span class="tag">Testiranje</span><span class="tag">Aplikacijska logika</span>
               </div>
             </div>
 
@@ -1377,7 +1428,7 @@
             <div class="contact-main">
               <div>
                 <h2>Javi se.</h2>
-                <p>Dostupan za web projekte, API integracije, React Native aplikacije i WordPress rješenja.</p>
+                <p>Dostupan za web projekte, API integracije, Next.js / TypeScript / React Native / Expo aplikacije i WordPress rješenja s Postgres backendom.</p>
               </div>
               <p>Zagreb, Hrvatska · hrvatski / engleski / osnovni njemački</p>
             </div>

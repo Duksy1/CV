@@ -141,7 +141,7 @@
     .side-top {
       position: relative;
       z-index: 1;
-      padding: 28px;
+      padding: clamp(16px, 3vh, 28px) clamp(16px, 2.2vw, 28px);
       border-bottom: 1px solid rgba(244, 241, 232, 0.18);
     }
 
@@ -152,18 +152,18 @@
     .monogram {
       display: grid;
       place-items: center;
-      width: 82px;
-      height: 82px;
-      margin-bottom: 24px;
+      width: clamp(54px, 9vh, 82px);
+      height: clamp(54px, 9vh, 82px);
+      margin-bottom: clamp(12px, 2.4vh, 24px);
       border: 1px solid currentColor;
       border-radius: 50%;
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: clamp(0.95rem, 1.6vh, 1.4rem);
       letter-spacing: -0.08em;
     }
 
     .side-title {
-      font-size: 0.82rem;
+      font-size: clamp(0.7rem, 1vh, 0.82rem);
       letter-spacing: 0.18em;
       text-transform: uppercase;
       opacity: 0.72;
@@ -171,8 +171,8 @@
 
     .side-role {
       max-width: 250px;
-      margin-top: 10px;
-      font-size: 1.45rem;
+      margin-top: clamp(6px, 1vh, 10px);
+      font-size: clamp(1.05rem, 1.9vh, 1.45rem);
       line-height: 1.05;
       letter-spacing: -0.025em;
       font-weight: 620;
@@ -184,14 +184,16 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 28px;
-      padding: 28px;
+      gap: clamp(14px, 2.8vh, 28px);
+      padding: clamp(16px, 3vh, 28px) clamp(16px, 2.2vw, 28px);
+      min-height: 0;
+      overflow: hidden;
     }
 
     .vertical-name {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
-      font-size: clamp(4.4rem, 7.3vw, 6.6rem);
+      font-size: clamp(2.4rem, 7vh, 6.6rem);
       line-height: 0.9;
       letter-spacing: -0.055em;
       font-weight: 680;
@@ -200,7 +202,7 @@
 
     .side-nav {
       display: grid;
-      gap: 6px;
+      gap: clamp(2px, 0.5vh, 6px);
       max-width: 260px;
     }
 
@@ -208,9 +210,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 11px 0;
+      padding: clamp(6px, 1.2vh, 11px) 0;
       border-bottom: 1px solid rgba(244, 241, 232, 0.2);
-      font-size: 0.9rem;
+      font-size: clamp(0.78rem, 1.1vh, 0.9rem);
       opacity: 0.72;
       transition: 0.2s ease;
     }
@@ -228,7 +230,7 @@
     .side-bottom {
       position: relative;
       z-index: 1;
-      padding: 28px;
+      padding: clamp(14px, 2.6vh, 28px) clamp(16px, 2.2vw, 28px);
       border-top: 1px solid rgba(244, 241, 232, 0.18);
     }
 
@@ -238,7 +240,7 @@
 
     .side-actions {
       display: grid;
-      grid-template-columns: 1fr 52px;
+      grid-template-columns: 1fr clamp(40px, 6vh, 52px);
       gap: 10px;
     }
 
@@ -255,19 +257,19 @@
     .side-btn {
       display: grid;
       place-items: center;
-      min-height: 52px;
+      min-height: clamp(40px, 6vh, 52px);
       padding: 0 16px;
       font-weight: 850;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      font-size: 0.78rem;
+      font-size: clamp(0.7rem, 1vh, 0.78rem);
     }
 
     .theme-btn,
     .mobile-menu-btn {
       display: grid;
       place-items: center;
-      min-height: 52px;
+      min-height: clamp(40px, 6vh, 52px);
       font-size: 1.1rem;
     }
 
@@ -1382,6 +1384,7 @@
                   <li>Svakodnevno radim na webu, API-jima i mobilnim aplikacijama. U stacku su uglavnom PHP, JavaScript/TypeScript, HTML/CSS i SQL/Postgres, a od framework strane WordPress, Next.js, React Native i Expo, plus Supabase i Vercel kad treba backend i hosting.</li>
                   <li>Vodim portfelj od oko 45 aktivnih stranica — to ide od bug fixeva i tehničke podrške, do vraćanja brzine kad neka stranica počne usporavati i dodavanja novih dijelova kad ih klijent zatraži.</li>
                   <li>Postavio interne alate, predloške i workflow koji su znatno ubrzali izradu novih stranica, featurea i projekata — ono što je prije trajalo danima sad se često složi u par sati.</li>
+                  <li>Uz ubrzanje, kontinuirano usavršavam i sve procese unutar firme koji se tiču mojeg dijela posla — od načina kako se kreće u projekt, preko handoff-a između faza, do isporuke i održavanja — da stvari budu jasnije, ujednačenije i manje ovisne o pojedincu.</li>
                   <li>Razvio festival aplikaciju u React Nativeu i povezao je s WordPress stranicom kao izvorom podataka (program, izvođači, lokacije, novosti) preko REST API-ja.</li>
                   <li>Pišem API integracije između sustava, uglavnom da bi se posao koji se prije radio ručno počeo raditi sam.</li>
                   <li>U mobilnom dijelu radim u React Nativeu (Expo workflow) i vežem aplikacije na Supabase/Postgres — auth, baza, storage, realtime.</li>
